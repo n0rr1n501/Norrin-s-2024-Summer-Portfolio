@@ -62,7 +62,6 @@ My next step is to add the Bluetooth component to the car and connect it to the 
 
 --!>
 
-For your first milestone, describe what your project is and how you plan to build it. You can include:
 - Retro Game Arcade Console. Play between Tetris and Snake. 
 - An explanation about the different components of your project and how they will all integrate together: With the motherboard in the middle, I connected six buttons to control different functions. There is a capacitor that stores energy, a speaker that houses the audio unit, and there are three LED displays that provide visuals to the games. 
 As I was finishing my soldering, I accidentally burned into the button of my console, rendering the button useless. Thus, using a replacement button, I desoldered the original and replaced it with the functional one.
