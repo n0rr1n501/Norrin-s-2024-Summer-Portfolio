@@ -61,14 +61,15 @@ My next step is to add the Bluetooth component to the car and connect it to the 
 **Don't forget to replace the text below with the embedding for your milestone video. Go to Youtube, click Share -> Embed, and copy and paste the code to replace what's below.**
 -->
 
-
 <iframe width="560" height="315" src="https://www.youtube.com/embed/-_DDak3KmOk?si=5Ynht2R5_4MEFsdl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 
-- Retro Game Arcade Console. Play between Tetris and Snake. 
-- An explanation about the different components of your project and how they will all integrate together: With the motherboard in the middle, I connected six buttons to control different functions. There is a capacitor that stores energy, a speaker that houses the audio unit, and there are three LED displays that provide visuals to the games. 
+- Retro Game Arcade Console. Play between Tetris and Snake.
+ <!--
+- An explanation about the different components of your project and how they will all integrate together:
+ -->
+- With the motherboard in the middle, I connected six buttons to control different functions. There is a capacitor that stores energy, a speaker that houses the audio unit, and there are three LED displays that provide visuals to the games. 
 As I was finishing my soldering, I accidentally burned into the button of my console, rendering the button useless. Thus, using a replacement button, I desoldered the original and replaced it with the functional one.
-- Challenges you're facing and solving in your future milestones
 My next step is to work on my main project: Gesture-controlled robot
 
 
