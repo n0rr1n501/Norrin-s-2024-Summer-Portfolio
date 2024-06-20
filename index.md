@@ -1,4 +1,4 @@
-# Gesture Controlled Robot
+e# Gesture Controlled Robot
 
 <!--Replace this text with a brief description (2-3 sentences) of your project. This description should draw the reader in and make them interested in what you've built. You can include what the biggest challenges, takeaways, and triumphs from completing the project were. As you complete your portfolio, remember your audience is less familiar than you are with all that your project entails! -->
 
@@ -38,10 +38,16 @@ For your final milestone, explain the outcome of your project. Key details to in
 <!--
 
 For your second milestone, explain what you've worked on since your previous milestone. You can highlight:
-- Technical details of what you've accomplished and how they contribute to the final goal
+
+-->
+
+- Technical details of what you've accomplished and how they contribute to the final goal, Up until my second milestone, I paired the transmitter and receiver Bluetooth modules together. Afterwards, I uploaded separate code to the robot and the glove.
+
+<!-- 
+
 - What has been surprising about the project so far
 - Previous challenges you faced that you overcame
-- What needs to be completed before your final milestone 
+- For my final milestone, I plan on finishing the chassis of the robot and adding the velcro to the breadboard for the glove.
 
 -->
 
