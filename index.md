@@ -1,8 +1,8 @@
-e# Gesture Controlled Robot
+Gesture Controlled Robot
 
 <!--Replace this text with a brief description (2-3 sentences) of your project. This description should draw the reader in and make them interested in what you've built. You can include what the biggest challenges, takeaways, and triumphs from completing the project were. As you complete your portfolio, remember your audience is less familiar than you are with all that your project entails! -->
 
-**| **Norrin A** | **Dougherty Valley High School** | **Mechanical Engineering** | **Incoming Junior** |
+| **Norrin A** | **Dougherty Valley High School** | **Mechanical Engineering** | **Incoming Junior** |
 
 
 
@@ -29,7 +29,7 @@ For your final milestone, explain the outcome of your project. Key details to in
 
 <!--
 
-**Don't forget to replace the text below with the embedding for your milestone video. Go to Youtube, click Share -> Embed, and copy and paste the code to replace what's below.**
+**Don't forget to replace the text below with the embedding for your milestone video. Go to YouTube, click Share -> Embed, and copy and paste the code to replace what's below.**
 
 -->
 
@@ -41,12 +41,12 @@ For your second milestone, explain what you've worked on since your previous mil
 
 -->
 
-- Technical details of what you've accomplished and how they contribute to the final goal, Up until my second milestone, I paired the transmitter and receiver Bluetooth modules together. Afterwards, I uploaded separate code to the robot and the glove.
+Up until my second milestone, I paired the transmitter and receiver Bluetooth modules together. First, I inputted commands to the receiver module, training it to be the receiver module. Using the address given by the receiver module, I assigned the transmitter module to its receiver. Then, I also ensured that the transmitter module knew that it was the transmitter module. Afterward, I uploaded separate codes to the robot, using the Arduino Uno, and the glove, using the Arduino Nano. Something that surprised me so far was how difficult it would be to pair two Bluetooth modules together. At first, the Bluetooth modules didn't pair together
 
 <!-- 
 
-- What has been surprising about the project so far
-- Previous challenges you faced that you overcame
+
+
 - For my final milestone, I plan on finishing the chassis of the robot and adding the velcro to the breadboard for the glove.
 
 -->
