@@ -41,7 +41,7 @@ For your second milestone, explain what you've worked on since your previous mil
 
 -->
 
-Up until my second milestone, I paired the transmitter and receiver Bluetooth modules together. First, I inputted commands to the receiver module, training it to be the receiver module. Using the address given by the receiver module, I assigned the transmitter module to its receiver. Then, I also ensured that the transmitter module knew that it was the transmitter module. Afterward, I uploaded separate codes to the robot, using the Arduino Uno, and the glove, using the Arduino Nano. Something that surprised me so far was how difficult it would be to pair two Bluetooth modules together. At first, the Bluetooth modules didn't pair together
+Up until my second milestone, I paired the transmitter and receiver Bluetooth modules together. First, I inputted commands to the receiver module, training it to be the receiver module. Using the address given by the receiver module, I assigned the transmitter module to its receiver. Then, I also ensured that the transmitter module knew that it was the transmitter module. Afterward, I uploaded separate codes to the robot, using the Arduino Uno, and the glove, using the Arduino Nano. Something that surprised me so far was how difficult it would be to pair two Bluetooth modules together. At first, the Bluetooth modules didn't pair together but with troubleshooting, I realized 
 
 <!-- 
 
