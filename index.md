@@ -10,7 +10,7 @@ Gesture Controlled Robot
 
 -->
 
-![Headstone Image](Norrin_A (3).jpg)
+![Headstone Image](norrinspicture.jpg)
 
   <!--
 # Final Milestone
