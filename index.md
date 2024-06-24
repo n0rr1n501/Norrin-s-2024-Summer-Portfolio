@@ -44,7 +44,7 @@ For your second milestone, explain what you've worked on since your previous mil
 
 -->
 
-Up until my second milestone, I paired the transmitter and receiver Bluetooth modules together. First, I inputted commands to the receiver module, training it to be the receiver module. Using the address given by the receiver module, I assigned the transmitter module to its receiver. Then, I also ensured that the transmitter module knew that it was the transmitter module. Afterward, I uploaded separate codes to the robot, using the Arduino Uno, and the glove, using the Arduino Nano. Something that surprised me so far was how difficult it would be to pair two Bluetooth modules together. At first, the Bluetooth modules didn't pair together but with troubleshooting, I realized 
+Up until my second milestone, I paired the transmitter and receiver Bluetooth modules together. First, I inputted commands to the receiver module, training it to be the receiver module. Using the address given by the receiver module, I assigned the transmitter module to its receiver. Then, I also ensured that the transmitter module knew that it was the transmitter module. Afterward, I uploaded separate codes to the robot, using the Arduino Uno, and the glove, using the Arduino Nano. Something that surprised me so far was how difficult it would be to pair two Bluetooth modules together. At first, the Bluetooth modules didn't pair together but with troubleshooting, I realized that my RX (the receiver module) and TX (the transmitter module) weren't connected to the right pins on my Arduino Uno. I also changed the battery pack of 4 AA batteries to a 9V battery. This would soon prove to be more consistent and powerful than the 4 AA batteries that I was previously using.
 
 <!-- 
 
@@ -65,10 +65,11 @@ Up until my second milestone, I paired the transmitter and receiver Bluetooth mo
 
 
 
-Up until my first milestone, I assembled the chassis of the car. I connected the four servo motors to the L298 motor driver and the Arduino Uno. I then uploaded the code from my computer to the Arduino Uno. Finally, I added the battery pack to the car to allow it to be powered independently.
+Up until my first milestone, I assembled the chassis of the car. I connected the four servo motors to the L298 motor driver and the Arduino Uno. I soldered the wires to the L298 motor driver and connected a battery pack consisting of 4 AA batteries to the L298 motor driver. After tweaking code previously used online, I uploaded the code from my computer to the Arduino Uno. 
 A problem I faced during my first assembly process was that my wheels were always inverse of each other. Two wheels spun in one direction and the other two spun in the other. 
 I found the solution when I realized that the assembly of my wires from the servo motors was inverted. Thus, the wheels were always inversed despite the code that I ran.
 After properly soldering the wires in the proper order, all four of my wheels spun in sync.
+Something surprising that I found during this first phase was using Arduino IDE. Even though it is my first time coding, my instructors were able to guide me and explain to me various functions and commands.
 My next step is to add the Bluetooth component to the car and connect it to the glove to enable steering.
 
 # Starter Project 
