@@ -66,10 +66,12 @@ Up until my second milestone, I paired the transmitter and receiver Bluetooth mo
 
 
 Up until my first milestone, I assembled the chassis of the car. I connected the four servo motors to the L298 motor driver and the Arduino Uno. I soldered the wires to the L298 motor driver and connected a battery pack consisting of 4 AA batteries to the L298 motor driver. After tweaking code previously used online, I uploaded the code from my computer to the Arduino Uno. 
+
 A problem I faced during my first assembly process was that my wheels were always inverse of each other. Two wheels spun in one direction and the other two spun in the other. 
 I found the solution when I realized that the assembly of my wires from the servo motors was inverted. Thus, the wheels were always inversed despite the code that I ran.
 After properly soldering the wires in the proper order, all four of my wheels spun in sync.
 Something surprising that I found during this first phase was using Arduino IDE. Even though it is my first time coding, my instructors were able to guide me and explain to me various functions and commands.
+
 My next step is to add the Bluetooth component to the car and connect it to the glove to enable steering.
 
 # Starter Project 
@@ -81,7 +83,7 @@ My next step is to add the Bluetooth component to the car and connect it to the 
 - Retro Game Arcade Console. Play between Tetris and Snake.
 - With the motherboard in the middle, I connected six buttons to control different functions. There is a capacitor that stores energy, a speaker that houses the audio unit, and there are three LED displays that provide visuals to the games. 
 As I was finishing my soldering, I accidentally burned into the button of my console, rendering the button useless. Thus, using a replacement button, I desoldered the original and replaced it with the functional one.
-My next step is to work on my main project: Gesture-controlled robot
+- My next step is to work on my main project: Gesture-controlled robot
 
 
 <!--
