@@ -5,6 +5,10 @@ Gesture Controlled Robot
 | **Norrin A** | **Dougherty Valley High School** | **Mechanical Engineering** | **Incoming Junior** |
 
 
+.bordered-image {![Headstone Image](norrinspicture.jpg)
+    border: 5px dashed blue;
+}
+
 
 ![Headstone Image](norrinspicture.jpg)
 
