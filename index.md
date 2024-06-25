@@ -126,6 +126,8 @@ void loop() {
 
 # Car Code 
 
+| **Code** |
+
 | #include <SoftwareSerial.h>
 SoftwareSerial BT_Serial(3,2); // RX, TX
 
