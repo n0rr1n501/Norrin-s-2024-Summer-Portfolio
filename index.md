@@ -72,6 +72,8 @@ Something surprising that I found during this first phase was using Arduino IDE.
 
 My next step is to add the Bluetooth component to the car and connect it to the glove to enable steering.
 
+
+
 # Starter Project - June 14, 2024
 
 
@@ -105,6 +107,12 @@ void loop() {
 }
 ```
 -->
+
+# Schematics 
+
+![Headstone Image](schematics.png)
+
+
 # Bill of Materials
 
 | **Part** | **Note** | **Price** | **Link** |
