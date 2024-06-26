@@ -73,46 +73,9 @@ Something surprising that I found during this first phase was using Arduino IDE.
 
 My next step is to add the Bluetooth component to the car and connect it to the glove to enable steering.
 
-
-
-# Starter Project - June 14, 2024
-
-
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/-_DDak3KmOk?si=5Ynht2R5_4MEFsdl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
-- Retro Game Arcade Console. Play between Tetris and Snake.
-- With the motherboard in the middle, I connected six buttons to control different functions. There is a capacitor that stores energy, a speaker that houses the audio unit, and there are three LED displays that provide visuals to the games. 
-As I was finishing my soldering, I accidentally burned into the button of my console, rendering the button useless. Thus, using a replacement button, I desoldered the original and replaced it with the functional one.
-- My next step is to work on my main project: Gesture-controlled robot
-
-
-<!--
-An explanation about the different components of your project and how they will all integrate together:
-# Schematics 
-Here's where you'll put images of your schematics. [Tinkercad](https://www.tinkercad.com/blog/official-guide-to-tinkercad-circuits) and [Fritzing](https://fritzing.org/learning/) are both great resoruces to create professional schematic diagrams, though BSE recommends Tinkercad becuase it can be done easily and for free in the browser. 
-
-# Code
-Here's where you'll put your code. The syntax below places it into a block of code. Follow the guide [here]([url](https://www.markdownguide.org/extended-syntax/)) to learn how to customize it to your project needs. 
-
-```c++
-void setup() {
-  // put your setup code here, to run once:
-  Serial.begin(9600);
-  Serial.println("Hello World!");
-}
-
-void loop() {
-  // put your main code here, to run repeatedly:
-
-}
-```
--->
-
 # Schematics 
 
 ![Headstone Image](schematics.png)
-
 
 # Bill of Materials
 
@@ -124,6 +87,30 @@ void loop() {
 | HC-05 Bluetooth Modules (x2) | The 2 connected Bluetooth modules are used to relay inputs from the Arduino Nano to the Arduino Nano | $9.99 each | <a href="https://www.amazon.com/DSD-TECH-HC-05-Pass-through-Communication/dp/B01G9KSAF6/ref=sr_1_3?crid=EFPP8ND0F5S7&dib=eyJ2IjoiMSJ9.GVe7xTdQBd8ycP5WU8ZbiQa5ABtI2bM6FlQhDvE7qEehbVcaugJQgfkVGgef-i5r_1ATgBKUe8c_pefUUiDCoTKoyKZDy0mGu9GyyxFREd_-f_bjNKNDNngbCzsDiJ6gPtukSd0aqRDAcI1GqmS702lhj-zRN7ETA0sYIxnIUQahAU0RS5p-k-NMcJIAPLfw1gXy7La21yMUCpYcYUHjBxoovm2ZG2gIM3BpsjRh-gg.p0dGgL2vGTRsIhjiIXUL57BuG6ru1MfQf12zRsbslC8&dib_tag=se&keywords=hc+05+bluetooth+module+arduino&qid=1719271041&sprefix=hc+05+%2Caps%2C159&sr=8-3"> Link </a> | 
 | 4 pack of DC Motors 3V-12V | These motors are used to turn the wheels of the car | $6.99 | <a href="https://www.amazon.com/DiGiYes-Electric-Motor-3V-12V-Shaft/dp/B0BSP7ZG1B/ref=sims_dp_d_dex_ai_speed_loc_touchpoints_mtl_t2_d_sccl_2_7/139-6116827-4803538?pd_rd_w=lRYuJ&content-id=amzn1.sym.b60dadd9-7f9e-4256-887b-3cfe6cc8c59d&pf_rd_p=b60dadd9-7f9e-4256-887b-3cfe6cc8c59d&pf_rd_r=NCMT3XF76ENRZYJHWJCP&pd_rd_wg=fyHul&pd_rd_r=82b2b014-4031-484a-b6be-443b5be96508&pd_rd_i=B0BSP7ZG1B&psc=1"> Link </a> |
 | 9V Battery Clip Connector | This connector allows the 9V to power the rest of my robot | $2.99 | <a href="https://www.amazon.com/RUZYY-Battery-Connector-Tinned-Leads/dp/B082DZ6YQJ/ref=sr_1_6?crid=3DET1PVSSRZN6&dib=eyJ2IjoiMSJ9.utuRXJZ_9zaFZGsXjVdqQCJxhQYbgeWwNkGW_nY5J_gfFUUewzBhhObJQyqwhz1qboz5yr4LsIemuTwIGrCfkAxr1DN4ZMHZSj9pSa8N4Pg49MeBGH51apODYq39ILY4P6W1cL-FKvUSnowbYofMuRdp2CUhZ31k3nmgcTKjRGV_KnigS67N6GkS80ZXjVobIuipsYHQM4KIm-Biip7DUD1GXA0z51YnmZkI6ZqmQmlZhstBL3aHIbIU5GOJ9l0tFWjEr0wTUdL9B5LPXQYdwsF5GnKGv97SgVUH5qT46Rw.PuYx2Qib6BuAqwAOc4Flb6Fr9Nie0rdAOvf1NiI2-Ww&dib_tag=se&keywords=9V+battery+with+connector&qid=1719272877&s=industrial&sprefix=9v+battery+with+connector%2Cindustrial%2C132&sr=1-6"> Link </a> |
+
+
+# Starter Project - June 14, 2024
+
+
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/-_DDak3KmOk?si=5Ynht2R5_4MEFsdl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+Retro Game Arcade Console. Play between Tetris and Snake.
+With the motherboard in the middle, I connected six buttons to control different functions. There is a capacitor that stores energy, a speaker that houses the audio unit, and there are three LED displays that provide visuals to the games. 
+As I was finishing my soldering, I accidentally burned into the button of my console, rendering the button useless. Thus, using a replacement button, I desoldered the original and replaced it with the functional one. 
+My next step is to work on my main project: Gesture-controlled robot
+
+
+<!--
+An explanation about the different components of your project and how they will all integrate together:
+# Schematics 
+Here's where you'll put images of your schematics. [Tinkercad](https://www.tinkercad.com/blog/official-guide-to-tinkercad-circuits) and [Fritzing](https://fritzing.org/learning/) are both great resoruces to create professional schematic diagrams, though BSE recommends Tinkercad becuase it can be done easily and for free in the browser. 
+
+# Code
+Here's where you'll put your code. The syntax below places it into a block of code. Follow the guide [here]([url](https://www.markdownguide.org/extended-syntax/)) to learn how to customize it to your project needs. 
+
+
+
 
 # Car Code 
 
@@ -273,7 +260,7 @@ Serial.print("\t");
 Serial.println(AcZ); 
 }
 
-
+-->
 <!--# Other Resources/Examples
 One of the best parts about Github is that you can view how other people set up their own work. Here are some past BSE portfolios that are awesome examples. You can view how they set up their portfolio, and you can view their index.md files to understand how they implemented different portfolio components.
 - [Example 1](https://trashytuber.github.io/YimingJiaBlueStamp/)
