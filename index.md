@@ -7,7 +7,7 @@ Gesture Controlled Robot
 
 
 <p align = "center">
-  <img src="norrinspicture.jpg" alt="Headshot" height = "750">
+  <img src="norrinspicture.jpg" alt="Headshot" height = "550>
 </p>
 
   
