@@ -10,6 +10,7 @@ Gesture Controlled Robot
   <img src="norrinspicture.jpg" alt="Headshot" height = "550>
 </p>
 
+
   
 # Final Milestone - June 24, 2024
 
