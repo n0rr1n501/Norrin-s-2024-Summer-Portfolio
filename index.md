@@ -1,13 +1,14 @@
 Gesture Controlled Robot
 
-<!--Replace this text with a brief description (2-3 sentences) of your project. This description should draw the reader in and make them interested in what you've built. You can include what the biggest challenges, takeaways, and triumphs from completing the project were. As you complete your portfolio, remember your audience is less familiar than you are with all that your project entails! -->
+With a turn of a hand, the gesture-controlled robot changes its course of direction. Compact and wireless, a glove strapped to a person's hand measures the tilt of your hand and relays these inputs using a Bluetooth module to the robot. The Arduino Uno (microcontroller) uses these inputs to articulately turn the four servo motors in sync.
+<!-- You can include what the biggest challenges, takeaways, and triumphs from completing the project were. As you complete your portfolio, remember your audience is less familiar than you are with all that your project entails! -->
 
 | Norrin A | Dougherty Valley High School | Mechanical Engineering | Incoming Junior |
 
 
 
 <p align = "center">
-  <img src="norrinspicture.jpg" alt="Headshot" height = "550>
+  <img src="norrinspicture.jpg" alt="Headshot" height = "500>
 </p>
 
 
@@ -16,6 +17,8 @@ Gesture Controlled Robot
 
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/eJQOG8lfubc?si=UOCV6jzpUhumPAgW" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+My final milestone marked the finishing touches of my project. For my glove, I added a velcro strap to carry the glove more easily. to be continued
 
 <!--
 
@@ -30,49 +33,26 @@ For your final milestone, explain the outcome of your project. Key details to in
 
 # Second Milestone - June 20, 2024
 
-<!--
-
-**Don't forget to replace the text below with the embedding for your milestone video. Go to YouTube, click Share -> Embed, and copy and paste the code to replace what's below.**
-
--->
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/TSlqBtQLMxg?si=DDPktpHAoMY3l5B3" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-<!--
-
-For your second milestone, explain what you've worked on since your previous milestone. You can highlight:
-
--->
-
-Up until my second milestone, I paired the transmitter and receiver Bluetooth modules together. First, I inputted commands to the receiver module, training it to be the receiver module. Using the address given by the receiver module, I assigned the transmitter module to its receiver. Then, I also ensured that the transmitter module knew that it was the transmitter module. Afterward, I uploaded separate codes to the robot, using the Arduino Uno, and the glove, using the Arduino Nano. Something that surprised me so far was how difficult it would be to pair two Bluetooth modules together. At first, the Bluetooth modules didn't pair together but with troubleshooting, I realized that my RX (the receiver module) and TX (the transmitter module) weren't connected to the right pins on my Arduino Uno. I also changed the battery pack of 4 AA batteries to a 9V battery. This would soon prove to be more consistent and powerful than the 4 AA batteries that I was previously using.
-
-<!-- 
 
 
+Up until my second milestone, I paired the transmitter and receiver Bluetooth modules together. First, I inputted commands to the receiver module, training it to be the receiver module. Using the address given by the receiver module, I assigned the transmitter module to its receiver. Then, I also ensured that the transmitter module knew that it was the transmitter module. Afterward, I uploaded separate codes to the robot, using the Arduino Uno, and the glove, using the Arduino Nano. Something that surprised me so far was how difficult it would be to pair two Bluetooth modules together. At first, the Bluetooth modules didn't pair together but with troubleshooting, I realized that my RX (the receiver module) and TX (the transmitter module) weren't connected to the right pins on my Arduino Uno. I also changed the battery pack of 4 AA batteries to a 9V battery. This would soon prove to be more consistent and powerful than the 4 AA batteries that I was previously using. For my final milestone, I plan on finishing the chassis of the robot and adding velcro to the breadboard for the glove.
 
-- For my final milestone, I plan on finishing the chassis of the robot and adding the velcro to the breadboard for the glove.
 
--->
 
 # First Milestone - June 19, 2024
 
-<!--
 
-**Don't forget to replace the text below with the embedding for your milestone video. Go to Youtube, click Share -> Embed, and copy and paste the code to replace what's below.**
--->
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/kYBrKpNs_0c?si=Xsxn6HwXDczbrZ2b" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 
 
-Up until my first milestone, I assembled the chassis of the car. I connected the four servo motors to the L298 motor driver and the Arduino Uno. I soldered the wires to the L298 motor driver and connected a battery pack consisting of 4 AA batteries to the L298 motor driver. After tweaking code previously used online, I uploaded the code from my computer to the Arduino Uno. 
-
-A problem I faced during my first assembly process was that my wheels were always inverse of each other. Two wheels spun in one direction and the other two spun in the other. 
-I found the solution when I realized that the assembly of my wires from the servo motors was inverted. Thus, the wheels were always inversed despite the code that I ran.
+Up until my first milestone, I assembled the chassis of the car. I connected the four servo motors to the L298 motor driver and the Arduino Uno. I soldered the wires to the L298 motor driver and connected a battery pack consisting of 4 AA batteries to the L298 motor driver. After tweaking the code previously used online, I uploaded the code from my computer to the Arduino Uno. A problem I faced during my first assembly process was that my wheels were always inverse of each other. Two wheels spun in one direction and the other two spun in the other. I found the solution when I realized that the assembly of my wires from the servo motors was inverted. Thus, the wheels were always inversed despite the code that I ran.
 After properly soldering the wires in the proper order, all four of my wheels spun in sync.
-Something surprising that I found during this first phase was using Arduino IDE. Even though it is my first time coding, my instructors were able to guide me and explain to me various functions and commands.
-
-My next step is to add the Bluetooth component to the car and connect it to the glove to enable steering.
+Something surprising that I found during this first phase was using Arduino IDE. Even though it was my first time coding, my instructors were able to guide me and explain to me various functions and commands. My next step is to add the Bluetooth component to the car and connect it to the glove to enable steering.
 
 # Schematics 
 
