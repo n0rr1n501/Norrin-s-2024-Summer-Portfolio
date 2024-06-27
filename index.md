@@ -18,6 +18,7 @@ With a turn of a hand, the gesture-controlled robot changes its course of direct
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/eJQOG8lfubc?si=UOCV6jzpUhumPAgW" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
+
 My final milestone marked the finishing touches of my project. For my glove, I added a velcro strap to carry the glove more easily. to be continued
 
 <!--
