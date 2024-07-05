@@ -72,27 +72,27 @@ if (startcounter>10 && lighton == false){(recorder = true); (lighton = true); Se
 if (lighton == true){digitalWrite(redlight,HIGH);} // if "lighton" is set to true then, the code will digitally write HIGH to "redlight"
 
 if (ButtonState == HIGH && lighton == true){endcounter = endcounter+1;} // if "ButtonState" is set to HIGH and "lighton" is set to true then, "encounter" will incrementally increase by 1 as the two previous prerequisites are true
-if (lighton == true && endcounter>25){(recorder = false); (lighton = false); Serial.println("endcounterworks"); (endcounter=0); (playback = true);}
-if (index != 0 && recorder == true){arraytime[index-1]+=1;}
-if (lighton == false){digitalWrite(redlight, LOW);}
+if (lighton == true && endcounter>25){(recorder = false); (lighton = false); Serial.println("endcounterworks"); (endcounter=0); (playback = true);} // if "lighton" is true and "encounter" is greater than 25 counts then, "recorder" is set to false, "lighton" is set to false, and "endcounterworks" will print in the serial monitor. Additionally, "encounter" is reset to 0 and "playback" is set to true
+if (index != 0 && recorder == true){arraytime[index-1]+=1;} // if "index" is not equal to 0 and "recorder" is set to true then, the "arraytime's" index moves down one and back up to one
+if (lighton == false){digitalWrite(redlight, LOW);} // if "lighton" is set to false then, the code will digitally write LOW to "redlight"
 
-if (playback == true) {
+if (playback == true) { // if "playback" is set to true, the entire rest of the code below will be executed
 
-if (index == 0){playback = false;}
-char letter; 
-letter = array[index-1];
-int loop;
-loop = arraytime[index-1];
-if (loop == 0){index = index-1; return;}
-arraytime[index-1]-=1;
-if (letter == 'f'){BT_Serial.write ('b');}
-if (letter == 'b'){BT_Serial.write ('f');}
-if (letter == 'r'){BT_Serial.write ('l');}
-if (letter == 'l'){BT_Serial.write ('r');}
-if (letter == 's'){BT_Serial.write ('s');}
-//if (index == 0){playback = false;} // worked without this
+if (index == 0){playback = false;} // if "index" is set to 0 then, "playback" is set to false
+char letter; // the character "letter" is definedf
+letter = array[index-1]; // "letter" is then set to "array" but its index is incrementally decreased by 1
+int loop; // the integer loops is added
+loop = arraytime[index-1]; // "loop" is set to "arraytime" but its index is incrementally decreased by 1
+if (loop == 0){index = index-1; return;} // if "loop" is set to 0 then, "index" is incrementally decreased by one and the computer will exit out of the loop or return
+arraytime[index-1]-=1; // "arraytime" essentially takes the value in the index and subtracts one. This function essentially counts the time inside "arraytime"
+if (letter == 'f'){BT_Serial.write ('b');} // if the "letter" is "f" then, the computer will send via Bluetooth "b"
+if (letter == 'b'){BT_Serial.write ('f');} // if the "letter" is "b" then, the computer will send via Bluetooth "f"
+if (letter == 'r'){BT_Serial.write ('l');} // if the "letter" is "r" then, the computer will send via Bluetooth "l"
+if (letter == 'l'){BT_Serial.write ('r');} // if the "letter" is "l" then, the computer will send via Bluetooth "r"
+if (letter == 's'){BT_Serial.write ('s');} // if the "letter" is "s" then, the computer will send via Bluetooth "s"
 
-}else{
+
+}else{ // "playback" is not set to true then, the rest of these lines will be executed
 
 if((AcX>120) && (AcX<150)){Send_command('b');}
 //if(AcX>150){BT_Serial.write('z');}
@@ -133,11 +133,11 @@ Serial.println(AcZ);
 }
 
 
-void Send_command(char cmd){
-if (cmd == current){return;}
-current = cmd; 
-BT_Serial.write (cmd);
-if (recorder == false){return;}
+void Send_command(char cmd){ // another function "Send_command" is created and the character "cmd" is defined
+if (cmd == current){return;} // if "cmd" is set or equal to "current" then the computer will exit out of the function
+current = cmd; // "current" is set to "cmd"
+BT_Serial.write (cmd); // the computer sends "cmd" via Bluetooth
+if (recorder == false){return;} 
 array[index] = cmd;
 //current = cmd;
 index = index+1; 
