@@ -11,6 +11,10 @@ With a turn of a hand, the gesture-controlled robot changes its course of direct
   <img src="norrinspicture.jpg" alt="Headshot" height = "500>
 </p>
 
+# Modification - July 5, 2024
+
+My modification for my project was to add a return/retreival function to the robot. This return feature would enable me to bring the robot back to where it started. My modification consisted of different parts: the input, the counter and recorder, and the playback. Because the modification was heavily focused on code, I previously researched different ways I could take to acheive my goal. First, I shifted my attention to creating the separate input to enable the entire function. I experimented with using AcZ values and certain degrees of AcX and AcY values, similar to the original inputs to the car, but, I finally landed upon using a button as it proved to be reliable. Next, with the aid of my instructor, Ben, I designed the counter and recorder using int (integers) and bools. The counter recorder counts the time that the button is held, allowing the rest of the return feature to run. Similarly, the recorder records the movements sent to the robot once the return feature is enabled. The playback part of the return feature was tricky as I had to move my reading of the inputs down one by one until no other inputs were left in the recorder.
+
 
   
 # Final Milestone - June 24, 2024
@@ -19,7 +23,7 @@ With a turn of a hand, the gesture-controlled robot changes its course of direct
 <iframe width="560" height="315" src="https://www.youtube.com/embed/eJQOG8lfubc?si=UOCV6jzpUhumPAgW" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 
-My final milestone marked the finishing touches of my project. For my glove, I added a velcro strap to carry the glove more easily. to be continued
+My final milestone marked the finishing touches of my project. For my glove, I added a velcro strap to carry the glove more easily. I also trimmed the wires on my robot and glove for a cleaner and compact look. During my time at BlueStamp, I had many challenges such as my motors not spinning in the correct direction and adding the electrical components to the glove's breadboard. On the other hand, I had many breakthroughs such as successfully pairing the two Bluetooth modules together and acheiving the four main movements to my car. I learned many exciting things at BlueStamp such as the basics to hardware: soldering and electrical components such as resistors, jumper wires and electrical currents. I also learned how to code and understand code in Arduino, a coding program. 
 
 <!--
 
