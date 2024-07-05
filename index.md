@@ -88,12 +88,12 @@ Here's where you'll put images of your schematics. [Tinkercad](https://www.tinke
 
 # Code
 Here's where you'll put your code. The syntax below places it into a block of code. Follow the guide [here]([url](https://www.markdownguide.org/extended-syntax/)) to learn how to customize it to your project needs. 
-
+-->
 
 
 
 # Car Code 
-
+```C++
 #include <SoftwareSerial.h>
 SoftwareSerial BT_Serial(3,2); // RX, TX
 
@@ -109,7 +109,7 @@ int Speed = 150; //Write The Duty Cycle 0 to 255 Enable Pins for Motor Speed
 
 void setup() { // put your setup code here, to run once
 
-// Serial.begin(9600); // start serial communication at 9600bps
+Serial.begin(9600); // start serial communication at 9600bps
 BT_Serial.begin(9600); 
 
 pinMode(enA, OUTPUT); // declare as output for L298 Pin enA 
@@ -122,17 +122,21 @@ pinMode(enB, OUTPUT); // declare as output for L298 Pin enB
 delay(200);
 }
 void loop(){
-if(BT_Serial.available() > 0){  //if some date is sent, reads it and saves in state     
-bt_data = BT_Serial.read(); 
+if(BT_Serial.available() > 0){  //if some data is sent, reads it and saves in state     
+
+  bt_data = BT_Serial.read(); 
+
 delay(50);
-// Serial.println(bt_data);          
+Serial.println(bt_data);        
+
 }
   
-     if(bt_data == 'f'){forword();  Speed=120;}  // if the bt_data is 'f' the DC motor will go forward
-else if(bt_data == 'b'){backword(); Speed=120;}  // if the bt_data is 'b' the motor will Reverse
-else if(bt_data == 'l'){turnLeft(); Speed=120;}  // if the bt_data is 'l' the motor will turn left
-else if(bt_data == 'r'){turnRight();Speed=120;} // if the bt_data is 'r' the motor will turn right
-else if(bt_data == 's'){Stop(); }     // if the bt_data 's' the motor will Stop
+
+     if(bt_data == 'f'){forward();  Speed=100;}  // if the bt_data is 'f' the DC motor will go forward
+else if(bt_data == 'b'){backward(); Speed=100;}  // if the bt_data is 'b' the motor will Reverse
+else if(bt_data == 'l'){left(); Speed=100;}  // if the bt_data is 'l' the motor will turn left
+else if(bt_data == 'r'){right();Speed=100;} // if the bt_data is 'r' the motor will turn right
+else if(bt_data == 's'){stop(); }     // if the bt_data 's' the motor will Stop
 
 analogWrite(enA, Speed); // Write The Duty Cycle 0 to 255 Enable Pin A for Motor1 Speed 
 analogWrite(enB, Speed); // Write The Duty Cycle 0 to 255 Enable Pin B for Motor2 Speed 
@@ -140,43 +144,45 @@ analogWrite(enB, Speed); // Write The Duty Cycle 0 to 255 Enable Pin B for Motor
 delay(50);
 }
 
-void forword(){  //forword
+void forward(){  //forword
 digitalWrite(in1, HIGH); //Right Motor forword Pin 
 digitalWrite(in2, LOW);  //Right Motor backword Pin 
-digitalWrite(in3, LOW);  //Left Motor backword Pin 
-digitalWrite(in4, HIGH); //Left Motor forword Pin 
+digitalWrite(in3, HIGH);  //Left Motor backword Pin 
+digitalWrite(in4, LOW); //Left Motor forword Pin 
 }
 
-void backword(){ //backword
+void backward(){ //backword
 digitalWrite(in1, LOW);  //Right Motor forword Pin 
 digitalWrite(in2, HIGH); //Right Motor backword Pin 
-digitalWrite(in3, HIGH); //Left Motor backword Pin 
-digitalWrite(in4, LOW);  //Left Motor forword Pin 
+digitalWrite(in3, LOW); //Left Motor backword Pin 
+digitalWrite(in4, HIGH);  //Left Motor forword Pin 
 }
 
-void turnRight(){ //turnRight
+void right(){ //turnRight
 digitalWrite(in1, LOW);  //Right Motor forword Pin 
 digitalWrite(in2, HIGH); //Right Motor backword Pin  
-digitalWrite(in3, LOW);  //Left Motor backword Pin 
-digitalWrite(in4, HIGH); //Left Motor forword Pin 
+digitalWrite(in3, HIGH);  //Left Motor backword Pin 
+digitalWrite(in4, LOW); //Left Motor forword Pin 
 }
 
-void turnLeft(){ //turnLeft
-digitalWrite(in1, HIGH); //Right Motor forword Pin 
-digitalWrite(in2, LOW);  //Right Motor backword Pin 
-digitalWrite(in3, HIGH); //Left Motor backword Pin 
-digitalWrite(in4, LOW);  //Left Motor forword Pin 
+void left(){ //turnLeft
+digitalWrite(in1, HIGH); //Right Motor forword Pin high
+digitalWrite(in2, LOW);  //Right Motor backword Pin lo
+digitalWrite(in3, LOW); //Left Motor backword Pin lo
+digitalWrite(in4, HIGH);  //Left Motor forword Pin hi
 }
 
-void Stop(){ //stop
+void stop(){ //stop
 digitalWrite(in1, LOW); //Right Motor forword Pin 
 digitalWrite(in2, LOW); //Right Motor backword Pin 
 digitalWrite(in3, LOW); //Left Motor backword Pin 
 digitalWrite(in4, LOW); //Left Motor forword Pin 
-} 
+}
 
+```
+
+```C++
 # Glove Code
-
 #include <SoftwareSerial.h>
 SoftwareSerial BT_Serial(3,2); // RX, TX
 
@@ -184,8 +190,21 @@ SoftwareSerial BT_Serial(3,2); // RX, TX
 
 const int MPU = 0x68; // I2C address of the MPU6050 accelerometer
 int16_t AcX, AcY, AcZ;
+int startcounter=0;
+int endcounter=0;
+bool recorder = false; //used int before bool/
 
-int flag=0;
+char array[300] = {}; 
+int arraytime[300] = {};
+char current;
+int index = 0;
+
+bool playback = false;
+
+const int button = 5;
+const int redlight = 4;
+
+bool lighton = false;
 
 void setup () {// put your setup code here, to run once
 
@@ -200,22 +219,54 @@ Wire.write(0);
 Wire.endTransmission(true);
 
 delay(500); 
+
+pinMode(button, INPUT);
+pinMode(redlight, OUTPUT);
+
 }
 
-void loop () {
+void loop (){
 Read_accelerometer(); // Read MPU6050 accelerometer
 
-if(AcX<60  && flag==0){flag=1; BT_Serial.write('f');}
-if(AcX>130 && flag==0){flag=1; BT_Serial.write('b');}
-      
-if(AcY<60  && flag==0){flag=1; BT_Serial.write('l'); }
-if(AcY>130 && flag==0){flag=1; BT_Serial.write('r');}
-  
-if((AcX>70)&&(AcX<120)&&(AcY>70)&&(AcY<120)&&(flag==1)){flag=0;
-BT_Serial.write('s');
+int ButtonState = digitalRead(button);
+
+if (ButtonState == HIGH && lighton == false){startcounter = startcounter+1;} // originally (AcX<30)
+if (startcounter>10 && lighton == false){(recorder = true); (lighton = true); Serial.println("startcounterworks"); (startcounter=0);} // originally (startcounter>13)
+if (lighton == true){digitalWrite(redlight,HIGH);}
+
+if (ButtonState == HIGH && lighton == true){endcounter = endcounter+1;} // (AcX>150) original
+if (lighton == true && endcounter>25){(recorder = false); (lighton = false); Serial.println("endcounterworks"); (endcounter=0); (playback = true);}
+if (index != 0 && recorder == true){arraytime[index-1]+=1;}
+if (lighton == false){digitalWrite(redlight, LOW);}
+
+if (playback == true) {
+
+if (index == 0){playback = false;}
+char letter; 
+letter = array[index-1];
+int loop;
+loop = arraytime[index-1];
+if (loop == 0){index = index-1; return;}
+arraytime[index-1]-=1;
+if (letter == 'f'){BT_Serial.write ('b');}
+if (letter == 'b'){BT_Serial.write ('f');}
+if (letter == 'r'){BT_Serial.write ('l');}
+if (letter == 'l'){BT_Serial.write ('r');}
+if (letter == 's'){BT_Serial.write ('s');}
+//if (index == 0){playback = false;} // worked without this
+
+}else{
+
+if((AcX>120) && (AcX<150)){Send_command('b');}
+//if(AcX>150){BT_Serial.write('z');}
+if((AcX<60) && (AcX>30)){Send_command('f');}
+if(AcY<60){Send_command('l');}
+if(AcY>130){Send_command('r');}
+if((AcX>70)&&(AcX<120)&&(AcY>70)&&(AcY<120)){Send_command('s');}
 }
 
-delay(100);  
+delay(100); // originally 100  
+
 }
 
 void Read_accelerometer(){
@@ -238,14 +289,26 @@ Serial.print("\t");
 Serial.print(AcY);
 Serial.print("\t");
 Serial.println(AcZ); 
+
 }
 
--->
+void Send_command(char cmd){
+if (cmd == current){return;}
+current = cmd; 
+BT_Serial.write (cmd);
+if (recorder == false){return;}
+array[index] = cmd;
+//current = cmd;
+index = index+1; 
+arraytime[index] = 0; 
+if (index >= 300){index=0;}
+} 
+
+```
+
 <!--# Other Resources/Examples
 One of the best parts about Github is that you can view how other people set up their own work. Here are some past BSE portfolios that are awesome examples. You can view how they set up their portfolio, and you can view their index.md files to understand how they implemented different portfolio components.
 - [Example 1](https://trashytuber.github.io/YimingJiaBlueStamp/)
 - [Example 2](https://sviatil0.github.io/Sviatoslav_BSE/)
 - [Example 3](https://arneshkumar.github.io/arneshbluestamp/)
 
-To watch the BSE tutorial on how to create a portfolio, click here.
--->
