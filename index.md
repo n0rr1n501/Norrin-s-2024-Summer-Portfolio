@@ -7,7 +7,7 @@ With a turn of a hand, the gesture-controlled robot changes its course of direct
 
 
 
-<p align = "center">
+<p></p> align = "center">
   <img src="norrinspicture.jpg" alt="Headshot" height = "500>
 </p>
 
