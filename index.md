@@ -1,4 +1,4 @@
-eGesture Controlled Robot
+Gesture Controlled Robot
 
 With a turn of a hand, the gesture-controlled robot changes its course of direction. Compact and wireless, a glove strapped to a person's hand measures the tilt of your hand and relays these inputs using a Bluetooth module to the robot. The Arduino Uno (microcontroller) uses these inputs to articulately turn the four servo motors in sync.
 <!-- You can include what the biggest challenges, takeaways, and triumphs from completing the project were. As you complete your portfolio, remember your audience is less familiar than you are with all that your project entails! -->
