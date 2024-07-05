@@ -157,7 +157,11 @@ if (index >= 300){index=0;}
 <iframe width="560" height="315" src="https://www.youtube.com/embed/eJQOG8lfubc?si=UOCV6jzpUhumPAgW" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 
-My final milestone marked the finishing touches of my project. For my glove, I added a velcro strap to carry the glove more easily. I also trimmed the wires on my robot and glove for a cleaner and compact look. During my time at BlueStamp, I had many challenges such as my motors not spinning in the correct direction and adding the electrical components to the glove's breadboard. On the other hand, I had many breakthroughs such as successfully pairing the two Bluetooth modules together and acheiving the four main movements to my car. I learned many exciting things at BlueStamp such as the basics to hardware: soldering and electrical components such as resistors, jumper wires and electrical currents. I also learned how to code and understand code in Arduino, a coding program. 
+My final milestone marked the finishing touches of my project. For my glove, I added a velcro strap to carry the glove more easily. I also trimmed the wires on my robot and glove for a cleaner and compact look. During my time at BlueStamp, I had many challenges such as my motors not spinning in the correct direction and adding the electrical components to the glove's breadboard. On the other hand, I had many breakthroughs such as successfully pairing the two Bluetooth modules together and achieving the four main movements of my car. I learned many exciting things at BlueStamp such as the basics of hardware: soldering and electrical components such as resistors, jumper wires, and electrical currents. I also learned how to code and understand code in Arduino, a coding program. Below are images of the final glove and robot.
+
+
+  <img src="IMG_7520.jpg"  height = "500">
+</p>
 
 
 
