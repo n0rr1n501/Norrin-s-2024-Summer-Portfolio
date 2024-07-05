@@ -1,6 +1,7 @@
 Gesture Controlled Robot
 
 With a turn of a hand, the gesture-controlled robot changes its course of direction. Compact and wireless, a glove strapped to a person's hand measures the tilt of your hand and relays these inputs using a Bluetooth module to the robot. The Arduino Uno (microcontroller) uses these inputs to articulately turn the four servo motors in sync.
+
 <!-- You can include what the biggest challenges, takeaways, and triumphs from completing the project were. As you complete your portfolio, remember your audience is less familiar than you are with all that your project entails! -->
 
 | Norrin A | Dougherty Valley High School | Mechanical Engineering | Incoming Junior |
@@ -15,7 +16,11 @@ With a turn of a hand, the gesture-controlled robot changes its course of direct
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/LeT4ZPPdnww?si=4IwYQt-L5Fl9FiUL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-My modification for my project was to add a return/retrieval function to the robot. This return feature would enable me to bring the robot back to where it started. My modification consisted of different parts: the input, the counter and recorder, and the playback. Because the modification was heavily focused on code, I previously researched different ways I could take to achieve my goal. First, I shifted my attention to creating separate input to enable the entire function. I experimented with using AcZ values and certain degrees of AcX and AcY values, similar to the original inputs to the car, but, I finally landed upon using a button as it proved to be reliable. Next, with the aid of my instructor, Ben, I designed the counter and recorder using int (integers) and bools. The counter recorder counts the time that the button is held, allowing the rest of the return feature to run. Similarly, the recorder records the movements sent to the robot once the return feature is enabled. The playback part of the return feature was tricky as I had to move my reading of the inputs down one by one until no other inputs were left in the recorder. 
+My modification for my project was to add a return/retrieval function to the robot. This return feature would enable me to bring the robot back to where it started. My modification consisted of different parts: the input, the counter and recorder, and the playback. Because the modification was heavily focused on code, I previously researched different ways I could take to achieve my goal. First, I shifted my attention to creating separate input to enable the entire function. I experimented with using AcZ values and certain degrees of AcX and AcY values, similar to the original inputs to the car, but, I finally landed upon using a button as it proved to be reliable. Next, with the aid of my instructor, Ben, I designed the counter and recorder using int (integers) and bools. The counter recorder counts the time that the button is held, allowing the rest of the return feature to run. Similarly, the recorder records the movements sent to the robot once the return feature is enabled. The playback part of the return feature was tricky as I had to move my reading of the inputs down one by one until no other inputs were left in the recorder. Below is a picture of my modified glove with the two additional resistors, LED light, and button.
+
+  <img src="IMG_7533.jpg"  height = "500">
+</p>
+
 
 # Modified Glove Code 
 ```C++
@@ -157,6 +162,8 @@ My final milestone marked the finishing touches of my project. For my glove, I a
 
 
 
+
+
 # Second Milestone - June 20, 2024
 
 
@@ -165,6 +172,7 @@ My final milestone marked the finishing touches of my project. For my glove, I a
 
 
 Up until my second milestone, I paired the transmitter and receiver Bluetooth modules together. To achieve the connection, I first had to set the Bluetooth module to AT mode or "attention mode". This meant that the Bluetooth module was awaiting its further commands. Then, I inputted commands to the receiver module, training it to be the receiver module. I sent it the commands "AT", "AT+ROLE=0", and "AT+ADDR?" Using the address given by the receiver module, I assigned the transmitter module to its receiver using the following commands: "AT", "AT+ROLE=1", "AT+CMODE=0", and "AT+BIND=00<_address_> Then, I also ensured that the transmitter module knew that it was the transmitter module. Afterward, I uploaded separate codes to the robot, using the Arduino Uno, and the glove, using the Arduino Nano. Something that surprised me so far was how difficult it would be to pair two Bluetooth modules together. At first, the Bluetooth modules didn't pair together but with troubleshooting, I realized that my RX (the receiver module) and TX (the transmitter module) weren't connected to the right pins on my Arduino Uno. I also changed the battery pack of 4 AA batteries to a 9V battery. This would soon prove to be more consistent and powerful than the 4 AA batteries that I was previously using. For my final milestone, I plan on finishing the chassis of the robot and adding velcro to the breadboard for the glove. 
+Below is a picture of the two identical Bluetooth modules successfully paired and connected to their respective parts.
 
   <img src="IMG_7535.jpg"  height = "500">
 </p>
