@@ -163,7 +163,8 @@ My final milestone marked the finishing touches of my project. For my glove, I a
   <img src="IMG_7520.jpg"  height = "500">
 </p>
 
-
+  <img src="IMG_7537.jpg"  height = "500">
+</p>
 
 
 
