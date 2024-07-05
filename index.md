@@ -7,8 +7,8 @@ With a turn of a hand, the gesture-controlled robot changes its course of direct
 
 
 
-<!-- <p></p> align = "center"> -->
-  <img src="norrinspicture.jpg" alt="Headshot" height = "500>
+<p></p> align = "center"> 
+  <img src="norrinspicture.jpg" alt="Headshot" height = "500">
 </p>
 
 # Modification - July 5, 2024
@@ -165,6 +165,9 @@ My final milestone marked the finishing touches of my project. For my glove, I a
 
 
 Up until my second milestone, I paired the transmitter and receiver Bluetooth modules together. To achieve the connection, I first had to set the Bluetooth module to AT mode or "attention mode". This meant that the Bluetooth module was awaiting its further commands. Then, I inputted commands to the receiver module, training it to be the receiver module. I sent it the commands "AT", "AT+ROLE=0", and "AT+ADDR?" Using the address given by the receiver module, I assigned the transmitter module to its receiver using the following commands: "AT", "AT+ROLE=1", "AT+CMODE=0", and "AT+BIND=00<_address_> Then, I also ensured that the transmitter module knew that it was the transmitter module. Afterward, I uploaded separate codes to the robot, using the Arduino Uno, and the glove, using the Arduino Nano. Something that surprised me so far was how difficult it would be to pair two Bluetooth modules together. At first, the Bluetooth modules didn't pair together but with troubleshooting, I realized that my RX (the receiver module) and TX (the transmitter module) weren't connected to the right pins on my Arduino Uno. I also changed the battery pack of 4 AA batteries to a 9V battery. This would soon prove to be more consistent and powerful than the 4 AA batteries that I was previously using. For my final milestone, I plan on finishing the chassis of the robot and adding velcro to the breadboard for the glove. 
+
+  <img src="IMG_7535.jpg"  height = "500">
+</p>
 
 
 
