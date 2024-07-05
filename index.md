@@ -17,8 +17,133 @@ With a turn of a hand, the gesture-controlled robot changes its course of direct
 
 My modification for my project was to add a return/retreival function to the robot. This return feature would enable me to bring the robot back to where it started. My modification consisted of different parts: the input, the counter and recorder, and the playback. Because the modification was heavily focused on code, I previously researched different ways I could take to acheive my goal. First, I shifted my attention to creating the separate input to enable the entire function. I experimented with using AcZ values and certain degrees of AcX and AcY values, similar to the original inputs to the car, but, I finally landed upon using a button as it proved to be reliable. Next, with the aid of my instructor, Ben, I designed the counter and recorder using int (integers) and bools. The counter recorder counts the time that the button is held, allowing the rest of the return feature to run. Similarly, the recorder records the movements sent to the robot once the return feature is enabled. The playback part of the return feature was tricky as I had to move my reading of the inputs down one by one until no other inputs were left in the recorder. 
 
+# Modified Glove Code 
 ```C++
+#include <SoftwareSerial.h>
+SoftwareSerial BT_Serial(3,2); // RX, TX
 
+#include <Wire.h> // I2C communication library
+
+const int MPU = 0x68; // I2C address of the MPU6050 accelerometer
+int16_t AcX, AcY, AcZ;
+int startcounter=0;
+int endcounter=0;
+bool recorder = false; //used int before bool/
+
+char array[300] = {}; 
+int arraytime[300] = {};
+char current;
+int index = 0;
+
+bool playback = false;
+
+const int button = 5;
+const int redlight = 4;
+
+bool lighton = false;
+
+void setup () {// put your setup code here, to run once
+
+Serial.begin(9600); // start serial communication at 9600bps
+BT_Serial.begin(9600); 
+
+// Initialize interface to the MPU6050
+Wire.begin();
+Wire.beginTransmission(MPU);
+Wire.write(0x6B);
+Wire.write(0);
+Wire.endTransmission(true);
+
+delay(500); 
+
+pinMode(button, INPUT);
+pinMode(redlight, OUTPUT);
+
+}
+
+
+void loop (){
+Read_accelerometer(); // Read MPU6050 accelerometer
+
+int ButtonState = digitalRead(button);
+
+if (ButtonState == HIGH && lighton == false){startcounter = startcounter+1;} // originally (AcX<30)
+if (startcounter>10 && lighton == false){(recorder = true); (lighton = true); Serial.println("startcounterworks"); (startcounter=0);} // originally (startcounter>13)
+if (lighton == true){digitalWrite(redlight,HIGH);}
+
+if (ButtonState == HIGH && lighton == true){endcounter = endcounter+1;} // (AcX>150) original
+if (lighton == true && endcounter>25){(recorder = false); (lighton = false); Serial.println("endcounterworks"); (endcounter=0); (playback = true);}
+if (index != 0 && recorder == true){arraytime[index-1]+=1;}
+if (lighton == false){digitalWrite(redlight, LOW);}
+
+if (playback == true) {
+
+if (index == 0){playback = false;}
+char letter; 
+letter = array[index-1];
+int loop;
+loop = arraytime[index-1];
+if (loop == 0){index = index-1; return;}
+arraytime[index-1]-=1;
+if (letter == 'f'){BT_Serial.write ('b');}
+if (letter == 'b'){BT_Serial.write ('f');}
+if (letter == 'r'){BT_Serial.write ('l');}
+if (letter == 'l'){BT_Serial.write ('r');}
+if (letter == 's'){BT_Serial.write ('s');}
+//if (index == 0){playback = false;} // worked without this
+
+}else{
+
+if((AcX>120) && (AcX<150)){Send_command('b');}
+//if(AcX>150){BT_Serial.write('z');}
+if((AcX<60) && (AcX>30)){Send_command('f');}
+if(AcY<60){Send_command('l');}
+if(AcY>130){Send_command('r');}
+if((AcX>70)&&(AcX<120)&&(AcY>70)&&(AcY<120)){Send_command('s');}
+}
+
+delay(100); // originally 100  
+
+
+}
+
+void Read_accelerometer(){
+      // Read the accelerometer data
+Wire.beginTransmission(MPU);
+Wire.write(0x3B); // Start with register 0x3B (ACCEL_XOUT_H)
+Wire.endTransmission(false);
+Wire.requestFrom(MPU, 6, true); // Read 6 registers total, each axis value is stored in 2 registers
+
+//delay(500);
+
+AcX = Wire.read() << 8 | Wire.read(); // X-axis value
+AcY = Wire.read() << 8 | Wire.read(); // Y-axis value
+AcZ = Wire.read() << 8 | Wire.read(); // Z-axis value
+
+AcX = map(AcX, -17000, 17000, 0, 180);
+AcY = map(AcY, -17000, 17000, 0, 180);
+AcZ = map(AcZ, -17000, 17000, 0, 180);
+
+Serial.print(AcX);
+Serial.print("\t");
+Serial.print(AcY);
+Serial.print("\t");
+Serial.println(AcZ); 
+
+}
+
+
+void Send_command(char cmd){
+if (cmd == current){return;}
+current = cmd; 
+BT_Serial.write (cmd);
+if (recorder == false){return;}
+array[index] = cmd;
+//current = cmd;
+index = index+1; 
+arraytime[index] = 0; 
+if (index >= 300){index=0;}
+} 
 ```
   
 # Final Milestone - June 24, 2024
@@ -58,41 +183,6 @@ Something surprising that I found during this first phase was using Arduino IDE.
 # Schematics 
 
 ![Headstone Image](schematics.png)
-
-# Bill of Materials
-
-| **Part** | **Note** | **Price** | **Link** |
-|:--:|:--:|:--:|:--:|
-| Arduino UNO | What the item is used for | $27.69 | <a href="https://www.amazon.com/Arduino-A000066-ARDUINO-UNO-R3/dp/B008GRTSV6/"> Link </a> |
-| Arduino Nano | What the item is used for | $9.99 | <a href="https://www.amazon.com/TISEKER-ATmega328P-Microcontroller-Board-Arduino/dp/B0BGSXWKCM/ref=sr_1_6?dib=eyJ2IjoiMSJ9.DuUAPNKOZx3V-ph33HzyN0M-73jcP_H0KcW1aHgUufjV7lJPV4TYzgsQMxUkbhufBhMMFAL4SjgOxP8EpP9_Q39ErGkaalZubGX7qjqxr9Z5KdHSA_OL7s3w5lvoQC5iBBhG5gDx9MYyLH44W_MukLN2lN4_nke9QnYKr2y2jezvcojfWOUVNHAZFicP8x3XNqSHQDonDQFQruNCuhv3r8oWUYL1EchiciUQfD-iffA.vt4rWEyH9F9lgL1wtp7lSGb9hADagBkBtXTHMJTVGRE&dib_tag=se&hvadid=570571296416&hvdev=c&hvlocphy=9032183&hvnetw=g&hvqmt=e&hvrand=15173083804068026480&hvtargid=kwd-44438573049&hydadcr=18005_13462305&keywords=arduino+nano+r3&qid=1718408211&sr=8-6"> Link </a> |
-| MPU 6050 Accelerometer | Using the built-in gyroscope, the accelerometer can measure the angle of the tilt around the accelerometer | $9.90 | <a href="https:/www.amazon.com/Pre-Soldered-Accelerometer-Raspberry-Compatible-Arduino/dp/B0BMY15TC4/ref=sr_1_4?crid=39M8WPTG2TMBM&dib=eyJ2IjoiMSJ9.nQ-HfKOFyZoszrV3cxLK6stPzn4eOISYIBYbmDYSRsXiWsze7vqDPWtd62qWOkoaIn0bezgLZYnjo_EM-cOJcu0t0BbsJhTeUxhYzjTD15_1OTx4sQ_cbZok4MKJaIV3y0_1iOe2RY0gZFbV3bGzr6tOLUL56rajYTnOAO8vXafXh2A_17s62GCXQjQvzj4ADWlY4uKstUDdih1ftEYJqQGrSol_dSQCCh2jc8T4aLE.q5TvndnYyhDpmjXDX9Yo0n0LdABxVRLPyyztup4eMnU&dib_tag=se&keywords=mpu+6050&qid=1719270962&sprefix=mpu+%2Caps%2C143&sr=8-4"> Link </a> |
-| HC-05 Bluetooth Modules (x2) | The 2 connected Bluetooth modules are used to relay inputs from the Arduino Nano to the Arduino Nano | $9.99 each | <a href="https://www.amazon.com/DSD-TECH-HC-05-Pass-through-Communication/dp/B01G9KSAF6/ref=sr_1_3?crid=EFPP8ND0F5S7&dib=eyJ2IjoiMSJ9.GVe7xTdQBd8ycP5WU8ZbiQa5ABtI2bM6FlQhDvE7qEehbVcaugJQgfkVGgef-i5r_1ATgBKUe8c_pefUUiDCoTKoyKZDy0mGu9GyyxFREd_-f_bjNKNDNngbCzsDiJ6gPtukSd0aqRDAcI1GqmS702lhj-zRN7ETA0sYIxnIUQahAU0RS5p-k-NMcJIAPLfw1gXy7La21yMUCpYcYUHjBxoovm2ZG2gIM3BpsjRh-gg.p0dGgL2vGTRsIhjiIXUL57BuG6ru1MfQf12zRsbslC8&dib_tag=se&keywords=hc+05+bluetooth+module+arduino&qid=1719271041&sprefix=hc+05+%2Caps%2C159&sr=8-3"> Link </a> | 
-| 4 pack of DC Motors 3V-12V | These motors are used to turn the wheels of the car | $6.99 | <a href="https://www.amazon.com/DiGiYes-Electric-Motor-3V-12V-Shaft/dp/B0BSP7ZG1B/ref=sims_dp_d_dex_ai_speed_loc_touchpoints_mtl_t2_d_sccl_2_7/139-6116827-4803538?pd_rd_w=lRYuJ&content-id=amzn1.sym.b60dadd9-7f9e-4256-887b-3cfe6cc8c59d&pf_rd_p=b60dadd9-7f9e-4256-887b-3cfe6cc8c59d&pf_rd_r=NCMT3XF76ENRZYJHWJCP&pd_rd_wg=fyHul&pd_rd_r=82b2b014-4031-484a-b6be-443b5be96508&pd_rd_i=B0BSP7ZG1B&psc=1"> Link </a> |
-| 9V Battery Clip Connector | This connector allows the 9V to power the rest of my robot | $2.99 | <a href="https://www.amazon.com/RUZYY-Battery-Connector-Tinned-Leads/dp/B082DZ6YQJ/ref=sr_1_6?crid=3DET1PVSSRZN6&dib=eyJ2IjoiMSJ9.utuRXJZ_9zaFZGsXjVdqQCJxhQYbgeWwNkGW_nY5J_gfFUUewzBhhObJQyqwhz1qboz5yr4LsIemuTwIGrCfkAxr1DN4ZMHZSj9pSa8N4Pg49MeBGH51apODYq39ILY4P6W1cL-FKvUSnowbYofMuRdp2CUhZ31k3nmgcTKjRGV_KnigS67N6GkS80ZXjVobIuipsYHQM4KIm-Biip7DUD1GXA0z51YnmZkI6ZqmQmlZhstBL3aHIbIU5GOJ9l0tFWjEr0wTUdL9B5LPXQYdwsF5GnKGv97SgVUH5qT46Rw.PuYx2Qib6BuAqwAOc4Flb6Fr9Nie0rdAOvf1NiI2-Ww&dib_tag=se&keywords=9V+battery+with+connector&qid=1719272877&s=industrial&sprefix=9v+battery+with+connector%2Cindustrial%2C132&sr=1-6"> Link </a> |
-
-
-# Starter Project - June 14, 2024
-
-
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/-_DDak3KmOk?si=5Ynht2R5_4MEFsdl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
-Retro Game Arcade Console. Play between Tetris and Snake.
-With the motherboard in the middle, I connected six buttons to control different functions. There is a capacitor that stores energy, a speaker that houses the audio unit, and there are three LED displays that provide visuals to the games. 
-As I was finishing my soldering, I accidentally burned into the button of my console, rendering the button useless. Thus, using a replacement button, I desoldered the original and replaced it with the functional one. 
-My next step is to work on my main project: Gesture-controlled robot
-
-
-<!--
-An explanation about the different components of your project and how they will all integrate together:
-# Schematics 
-Here's where you'll put images of your schematics. [Tinkercad](https://www.tinkercad.com/blog/official-guide-to-tinkercad-circuits) and [Fritzing](https://fritzing.org/learning/) are both great resoruces to create professional schematic diagrams, though BSE recommends Tinkercad becuase it can be done easily and for free in the browser. 
-
-# Code
-Here's where you'll put your code. The syntax below places it into a block of code. Follow the guide [here]([url](https://www.markdownguide.org/extended-syntax/)) to learn how to customize it to your project needs. 
--->
-
-
 
 # Car Code 
 ```C++
@@ -182,9 +272,8 @@ digitalWrite(in4, LOW); //Left Motor forword Pin
 }
 
 ```
-
-```C++
 # Glove Code
+```C++
 #include <SoftwareSerial.h>
 SoftwareSerial BT_Serial(3,2); // RX, TX
 
@@ -192,21 +281,8 @@ SoftwareSerial BT_Serial(3,2); // RX, TX
 
 const int MPU = 0x68; // I2C address of the MPU6050 accelerometer
 int16_t AcX, AcY, AcZ;
-int startcounter=0;
-int endcounter=0;
-bool recorder = false; //used int before bool/
 
-char array[300] = {}; 
-int arraytime[300] = {};
-char current;
-int index = 0;
-
-bool playback = false;
-
-const int button = 5;
-const int redlight = 4;
-
-bool lighton = false;
+int flag=0;
 
 void setup () {// put your setup code here, to run once
 
@@ -221,54 +297,22 @@ Wire.write(0);
 Wire.endTransmission(true);
 
 delay(500); 
-
-pinMode(button, INPUT);
-pinMode(redlight, OUTPUT);
-
 }
 
-void loop (){
+void loop () {
 Read_accelerometer(); // Read MPU6050 accelerometer
 
-int ButtonState = digitalRead(button);
-
-if (ButtonState == HIGH && lighton == false){startcounter = startcounter+1;} // originally (AcX<30)
-if (startcounter>10 && lighton == false){(recorder = true); (lighton = true); Serial.println("startcounterworks"); (startcounter=0);} // originally (startcounter>13)
-if (lighton == true){digitalWrite(redlight,HIGH);}
-
-if (ButtonState == HIGH && lighton == true){endcounter = endcounter+1;} // (AcX>150) original
-if (lighton == true && endcounter>25){(recorder = false); (lighton = false); Serial.println("endcounterworks"); (endcounter=0); (playback = true);}
-if (index != 0 && recorder == true){arraytime[index-1]+=1;}
-if (lighton == false){digitalWrite(redlight, LOW);}
-
-if (playback == true) {
-
-if (index == 0){playback = false;}
-char letter; 
-letter = array[index-1];
-int loop;
-loop = arraytime[index-1];
-if (loop == 0){index = index-1; return;}
-arraytime[index-1]-=1;
-if (letter == 'f'){BT_Serial.write ('b');}
-if (letter == 'b'){BT_Serial.write ('f');}
-if (letter == 'r'){BT_Serial.write ('l');}
-if (letter == 'l'){BT_Serial.write ('r');}
-if (letter == 's'){BT_Serial.write ('s');}
-//if (index == 0){playback = false;} // worked without this
-
-}else{
-
-if((AcX>120) && (AcX<150)){Send_command('b');}
-//if(AcX>150){BT_Serial.write('z');}
-if((AcX<60) && (AcX>30)){Send_command('f');}
-if(AcY<60){Send_command('l');}
-if(AcY>130){Send_command('r');}
-if((AcX>70)&&(AcX<120)&&(AcY>70)&&(AcY<120)){Send_command('s');}
+if(AcX<60  && flag==0){flag=1; BT_Serial.write('f');}
+if(AcX>130 && flag==0){flag=1; BT_Serial.write('b');}
+      
+if(AcY<60  && flag==0){flag=1; BT_Serial.write('l'); }
+if(AcY>130 && flag==0){flag=1; BT_Serial.write('r');}
+  
+if((AcX>70)&&(AcX<120)&&(AcY>70)&&(AcY<120)&&(flag==1)){flag=0;
+BT_Serial.write('s');
 }
 
-delay(100); // originally 100  
-
+delay(100);  
 }
 
 void Read_accelerometer(){
@@ -291,22 +335,45 @@ Serial.print("\t");
 Serial.print(AcY);
 Serial.print("\t");
 Serial.println(AcZ); 
-
 }
-
-void Send_command(char cmd){
-if (cmd == current){return;}
-current = cmd; 
-BT_Serial.write (cmd);
-if (recorder == false){return;}
-array[index] = cmd;
-//current = cmd;
-index = index+1; 
-arraytime[index] = 0; 
-if (index >= 300){index=0;}
-} 
-
 ```
+
+# Bill of Materials
+
+| **Part** | **Note** | **Price** | **Link** |
+|:--:|:--:|:--:|:--:|
+| Arduino UNO | What the item is used for | $27.69 | <a href="https://www.amazon.com/Arduino-A000066-ARDUINO-UNO-R3/dp/B008GRTSV6/"> Link </a> |
+| Arduino Nano | What the item is used for | $9.99 | <a href="https://www.amazon.com/TISEKER-ATmega328P-Microcontroller-Board-Arduino/dp/B0BGSXWKCM/ref=sr_1_6?dib=eyJ2IjoiMSJ9.DuUAPNKOZx3V-ph33HzyN0M-73jcP_H0KcW1aHgUufjV7lJPV4TYzgsQMxUkbhufBhMMFAL4SjgOxP8EpP9_Q39ErGkaalZubGX7qjqxr9Z5KdHSA_OL7s3w5lvoQC5iBBhG5gDx9MYyLH44W_MukLN2lN4_nke9QnYKr2y2jezvcojfWOUVNHAZFicP8x3XNqSHQDonDQFQruNCuhv3r8oWUYL1EchiciUQfD-iffA.vt4rWEyH9F9lgL1wtp7lSGb9hADagBkBtXTHMJTVGRE&dib_tag=se&hvadid=570571296416&hvdev=c&hvlocphy=9032183&hvnetw=g&hvqmt=e&hvrand=15173083804068026480&hvtargid=kwd-44438573049&hydadcr=18005_13462305&keywords=arduino+nano+r3&qid=1718408211&sr=8-6"> Link </a> |
+| MPU 6050 Accelerometer | Using the built-in gyroscope, the accelerometer can measure the angle of the tilt around the accelerometer | $9.90 | <a href="https:/www.amazon.com/Pre-Soldered-Accelerometer-Raspberry-Compatible-Arduino/dp/B0BMY15TC4/ref=sr_1_4?crid=39M8WPTG2TMBM&dib=eyJ2IjoiMSJ9.nQ-HfKOFyZoszrV3cxLK6stPzn4eOISYIBYbmDYSRsXiWsze7vqDPWtd62qWOkoaIn0bezgLZYnjo_EM-cOJcu0t0BbsJhTeUxhYzjTD15_1OTx4sQ_cbZok4MKJaIV3y0_1iOe2RY0gZFbV3bGzr6tOLUL56rajYTnOAO8vXafXh2A_17s62GCXQjQvzj4ADWlY4uKstUDdih1ftEYJqQGrSol_dSQCCh2jc8T4aLE.q5TvndnYyhDpmjXDX9Yo0n0LdABxVRLPyyztup4eMnU&dib_tag=se&keywords=mpu+6050&qid=1719270962&sprefix=mpu+%2Caps%2C143&sr=8-4"> Link </a> |
+| HC-05 Bluetooth Modules (x2) | The 2 connected Bluetooth modules are used to relay inputs from the Arduino Nano to the Arduino Nano | $9.99 each | <a href="https://www.amazon.com/DSD-TECH-HC-05-Pass-through-Communication/dp/B01G9KSAF6/ref=sr_1_3?crid=EFPP8ND0F5S7&dib=eyJ2IjoiMSJ9.GVe7xTdQBd8ycP5WU8ZbiQa5ABtI2bM6FlQhDvE7qEehbVcaugJQgfkVGgef-i5r_1ATgBKUe8c_pefUUiDCoTKoyKZDy0mGu9GyyxFREd_-f_bjNKNDNngbCzsDiJ6gPtukSd0aqRDAcI1GqmS702lhj-zRN7ETA0sYIxnIUQahAU0RS5p-k-NMcJIAPLfw1gXy7La21yMUCpYcYUHjBxoovm2ZG2gIM3BpsjRh-gg.p0dGgL2vGTRsIhjiIXUL57BuG6ru1MfQf12zRsbslC8&dib_tag=se&keywords=hc+05+bluetooth+module+arduino&qid=1719271041&sprefix=hc+05+%2Caps%2C159&sr=8-3"> Link </a> | 
+| 4 pack of DC Motors 3V-12V | These motors are used to turn the wheels of the car | $6.99 | <a href="https://www.amazon.com/DiGiYes-Electric-Motor-3V-12V-Shaft/dp/B0BSP7ZG1B/ref=sims_dp_d_dex_ai_speed_loc_touchpoints_mtl_t2_d_sccl_2_7/139-6116827-4803538?pd_rd_w=lRYuJ&content-id=amzn1.sym.b60dadd9-7f9e-4256-887b-3cfe6cc8c59d&pf_rd_p=b60dadd9-7f9e-4256-887b-3cfe6cc8c59d&pf_rd_r=NCMT3XF76ENRZYJHWJCP&pd_rd_wg=fyHul&pd_rd_r=82b2b014-4031-484a-b6be-443b5be96508&pd_rd_i=B0BSP7ZG1B&psc=1"> Link </a> |
+| 9V Battery Clip Connector | This connector allows the 9V to power the rest of my robot | $2.99 | <a href="https://www.amazon.com/RUZYY-Battery-Connector-Tinned-Leads/dp/B082DZ6YQJ/ref=sr_1_6?crid=3DET1PVSSRZN6&dib=eyJ2IjoiMSJ9.utuRXJZ_9zaFZGsXjVdqQCJxhQYbgeWwNkGW_nY5J_gfFUUewzBhhObJQyqwhz1qboz5yr4LsIemuTwIGrCfkAxr1DN4ZMHZSj9pSa8N4Pg49MeBGH51apODYq39ILY4P6W1cL-FKvUSnowbYofMuRdp2CUhZ31k3nmgcTKjRGV_KnigS67N6GkS80ZXjVobIuipsYHQM4KIm-Biip7DUD1GXA0z51YnmZkI6ZqmQmlZhstBL3aHIbIU5GOJ9l0tFWjEr0wTUdL9B5LPXQYdwsF5GnKGv97SgVUH5qT46Rw.PuYx2Qib6BuAqwAOc4Flb6Fr9Nie0rdAOvf1NiI2-Ww&dib_tag=se&keywords=9V+battery+with+connector&qid=1719272877&s=industrial&sprefix=9v+battery+with+connector%2Cindustrial%2C132&sr=1-6"> Link </a> |
+
+
+# Starter Project - June 14, 2024
+
+
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/-_DDak3KmOk?si=5Ynht2R5_4MEFsdl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+Retro Game Arcade Console. Play between Tetris and Snake.
+With the motherboard in the middle, I connected six buttons to control different functions. There is a capacitor that stores energy, a speaker that houses the audio unit, and there are three LED displays that provide visuals to the games. 
+As I was finishing my soldering, I accidentally burned into the button of my console, rendering the button useless. Thus, using a replacement button, I desoldered the original and replaced it with the functional one. 
+My next step is to work on my main project: Gesture-controlled robot
+
+
+<!--
+An explanation about the different components of your project and how they will all integrate together:
+# Schematics 
+Here's where you'll put images of your schematics. [Tinkercad](https://www.tinkercad.com/blog/official-guide-to-tinkercad-circuits) and [Fritzing](https://fritzing.org/learning/) are both great resoruces to create professional schematic diagrams, though BSE recommends Tinkercad becuase it can be done easily and for free in the browser. 
+
+# Code
+Here's where you'll put your code. The syntax below places it into a block of code. Follow the guide [here]([url](https://www.markdownguide.org/extended-syntax/)) to learn how to customize it to your project needs. 
+-->
+
+
+
+
 
 <!--# Other Resources/Examples
 One of the best parts about Github is that you can view how other people set up their own work. Here are some past BSE portfolios that are awesome examples. You can view how they set up their portfolio, and you can view their index.md files to understand how they implemented different portfolio components.
