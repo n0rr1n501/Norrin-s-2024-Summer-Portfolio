@@ -370,10 +370,9 @@ Serial.println(AcZ);
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/-_DDak3KmOk?si=5Ynht2R5_4MEFsdl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-Retro Game Arcade Console. Play between Tetris and Snake.
-With the motherboard in the middle, I connected six buttons to control different functions. There is a capacitor that stores energy, a speaker that houses the audio unit, and there are three LED displays that provide visuals to the games. 
-As I was finishing my soldering, I accidentally burned into the button of my console, rendering the button useless. Thus, using a replacement button, I desoldered the original and replaced it with the functional one. 
-My next step is to work on my main project: Gesture-controlled robot
+Retro Game Arcade Console. 
+With the Retro Game Arcade Console, players can choose between Tetris and Snake.
+With the motherboard in the middle, I connected six buttons to control different functions. There is a capacitor that stores energy, a speaker that houses the audio unit, and there are three LED displays that provide visuals to the games. As I was finishing my soldering, I accidentally burned into the button of my console, rendering the button useless. Thus, using a replacement button, I desoldered the original and replaced it with the functional one. My next step is to work on my main project: Gesture-controlled robot
 
 
 <!--
@@ -389,9 +388,9 @@ Here's where you'll put your code. The syntax below places it into a block of co
 
 
 
-<!--# Other Resources/Examples
+<!-- # Other Resources/Examples
 One of the best parts about Github is that you can view how other people set up their own work. Here are some past BSE portfolios that are awesome examples. You can view how they set up their portfolio, and you can view their index.md files to understand how they implemented different portfolio components.
 - [Example 1](https://trashytuber.github.io/YimingJiaBlueStamp/)
 - [Example 2](https://sviatil0.github.io/Sviatoslav_BSE/)
 - [Example 3](https://arneshkumar.github.io/arneshbluestamp/)
-
+-->
