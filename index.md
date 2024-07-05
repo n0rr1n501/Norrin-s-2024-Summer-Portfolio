@@ -1,4 +1,4 @@
-Gesture Controlled Robot
+eGesture Controlled Robot
 
 With a turn of a hand, the gesture-controlled robot changes its course of direction. Compact and wireless, a glove strapped to a person's hand measures the tilt of your hand and relays these inputs using a Bluetooth module to the robot. The Arduino Uno (microcontroller) uses these inputs to articulately turn the four servo motors in sync.
 <!-- You can include what the biggest challenges, takeaways, and triumphs from completing the project were. As you complete your portfolio, remember your audience is less familiar than you are with all that your project entails! -->
@@ -15,7 +15,7 @@ With a turn of a hand, the gesture-controlled robot changes its course of direct
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/LeT4ZPPdnww?si=4IwYQt-L5Fl9FiUL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-My modification for my project was to add a return/retreival function to the robot. This return feature would enable me to bring the robot back to where it started. My modification consisted of different parts: the input, the counter and recorder, and the playback. Because the modification was heavily focused on code, I previously researched different ways I could take to acheive my goal. First, I shifted my attention to creating the separate input to enable the entire function. I experimented with using AcZ values and certain degrees of AcX and AcY values, similar to the original inputs to the car, but, I finally landed upon using a button as it proved to be reliable. Next, with the aid of my instructor, Ben, I designed the counter and recorder using int (integers) and bools. The counter recorder counts the time that the button is held, allowing the rest of the return feature to run. Similarly, the recorder records the movements sent to the robot once the return feature is enabled. The playback part of the return feature was tricky as I had to move my reading of the inputs down one by one until no other inputs were left in the recorder. 
+My modification for my project was to add a return/retrieval function to the robot. This return feature would enable me to bring the robot back to where it started. My modification consisted of different parts: the input, the counter and recorder, and the playback. Because the modification was heavily focused on code, I previously researched different ways I could take to achieve my goal. First, I shifted my attention to creating separate input to enable the entire function. I experimented with using AcZ values and certain degrees of AcX and AcY values, similar to the original inputs to the car, but, I finally landed upon using a button as it proved to be reliable. Next, with the aid of my instructor, Ben, I designed the counter and recorder using int (integers) and bools. The counter recorder counts the time that the button is held, allowing the rest of the return feature to run. Similarly, the recorder records the movements sent to the robot once the return feature is enabled. The playback part of the return feature was tricky as I had to move my reading of the inputs down one by one until no other inputs were left in the recorder. 
 
 # Modified Glove Code 
 ```C++
@@ -26,21 +26,21 @@ SoftwareSerial BT_Serial(3,2); // RX, TX
 
 const int MPU = 0x68; // I2C address of the MPU6050 accelerometer
 int16_t AcX, AcY, AcZ;
-int startcounter=0;
-int endcounter=0;
-bool recorder = false; //used int before bool/
+int startcounter=0; // adds the integer startcounter
+int endcounter=0; // adds the integer endcounter
+bool recorder = false; // adds the bool (true or false) recorder as false
 
-char array[300] = {}; 
-int arraytime[300] = {};
-char current;
-int index = 0;
+char array[300] = {}; // adds the character array and sets it to hold  300 values
+int arraytime[300] = {}; // adds the integer array time and sets that to hold 300 values
+char current; // adds the character current
+int index = 0; // adds the integer index and sets it to 0
 
-bool playback = false;
+bool playback = false; // adds the bool playback and sets it to false
 
-const int button = 5;
-const int redlight = 4;
+const int button = 5; // constantly reads the integer button to D5 on the Arduino Nano
+const int redlight = 4; // constantly reads the integer redlight to D4 on the Arduino Nano
 
-bool lighton = false;
+bool lighton = false; // adds the bool lighton and sets it to false
 
 void setup () {// put your setup code here, to run once
 
@@ -65,13 +65,13 @@ pinMode(redlight, OUTPUT);
 void loop (){
 Read_accelerometer(); // Read MPU6050 accelerometer
 
-int ButtonState = digitalRead(button);
+int ButtonState = digitalRead(button); // the integer "ButtonState" is set to digitally reading the integer "button" as previously defined above
 
-if (ButtonState == HIGH && lighton == false){startcounter = startcounter+1;} // originally (AcX<30)
-if (startcounter>10 && lighton == false){(recorder = true); (lighton = true); Serial.println("startcounterworks"); (startcounter=0);} // originally (startcounter>13)
-if (lighton == true){digitalWrite(redlight,HIGH);}
+if (ButtonState == HIGH && lighton == false){startcounter = startcounter+1;} // if the integer "ButtonState" is set to HIGH and "lighton" is set to false, then "startcounter" will incrementally increase by 1 as the two previous prerequisites are true
+if (startcounter>10 && lighton == false){(recorder = true); (lighton = true); Serial.println("startcounterworks"); (startcounter=0);} // if "startcounter" surpasses 10 counts and "lighton" is set to false then, "recorder" is set to true, "lighton" is set to true, and "startcounterworks" will print in the serial monitor for additional assurance. Additionally, "startcounter" is reset to 0
+if (lighton == true){digitalWrite(redlight,HIGH);} // if "lighton" is set to true then, the code will digitally write HIGH to "redlight"
 
-if (ButtonState == HIGH && lighton == true){endcounter = endcounter+1;} // (AcX>150) original
+if (ButtonState == HIGH && lighton == true){endcounter = endcounter+1;} // if "ButtonState" is set to HIGH and "lighton" is set to true then, "encounter" will incrementally increase by 1 as the two previous prerequisites are true
 if (lighton == true && endcounter>25){(recorder = false); (lighton = false); Serial.println("endcounterworks"); (endcounter=0); (playback = true);}
 if (index != 0 && recorder == true){arraytime[index-1]+=1;}
 if (lighton == false){digitalWrite(redlight, LOW);}
